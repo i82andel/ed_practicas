@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/aneri/i82andel/check_brackets/slist.hpp
+iostream
+-
+sstream
+-
+string
+-
+memory
+-
+stdexcept
+-
+cassert
+-
+
+/home/aneri/i82andel/check_brackets/test_slist.cpp
+stdexcept
+-
+iostream
+-
+fstream
+-
+string
+-
+slist.hpp
+/home/aneri/i82andel/check_brackets/slist.hpp
+

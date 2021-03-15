@@ -1,0 +1,5 @@
+/home/aneri/i82andel/check_brackets/build/CMakeFiles/rebuild_cache.dir
+/home/aneri/i82andel/check_brackets/build/CMakeFiles/edit_cache.dir
+/home/aneri/i82andel/check_brackets/build/CMakeFiles/test_check_brackets.dir
+/home/aneri/i82andel/check_brackets/build/CMakeFiles/test_stack.dir
+/home/aneri/i82andel/check_brackets/build/CMakeFiles/test_slist.dir
