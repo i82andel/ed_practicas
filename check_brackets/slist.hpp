@@ -147,11 +147,7 @@ class SList
   {
       //TODO
       head = nullptr;
-<<<<<<< HEAD
       current_ =  head;
-=======
-      current =  head;
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
       assert(is_empty());
   }
 
@@ -185,7 +181,6 @@ class SList
 
       //TODO
       //Hint: use std::istringstream to convert a token into generic T type.
-<<<<<<< HEAD
 
       std::string token;
       std::getline(in, token, '\n');
@@ -226,9 +221,6 @@ class SList
         
       }
 
-=======
-      
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
       return list;
 
 
@@ -247,11 +239,7 @@ class SList
   {
 
       //TODO
-<<<<<<< HEAD
       if (head == nullptr)
-=======
-      if (head ==  nullptr)
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
       {
           return true;
       }
@@ -277,11 +265,7 @@ class SList
   {
       assert(! is_empty());
       //TODO
-<<<<<<< HEAD
       return current_->item();
-=======
-      return current->item();
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
   }
 
   /**
@@ -293,11 +277,7 @@ class SList
   {
       assert(!is_empty());
       //TODO
-<<<<<<< HEAD
       if (current_->next() != nullptr)
-=======
-      if (current->next() != NULL)
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
       {
           return true;
       }
@@ -314,11 +294,7 @@ class SList
   {
       //TODO
       assert(has_next());
-<<<<<<< HEAD
       return current_->next()->item();
-=======
-      return auxNode->next()->item();
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
   }
 
 
@@ -331,7 +307,6 @@ class SList
   {
       //TODO
       typename SNode<T>::Ref auxNode = head;
-<<<<<<< HEAD
       while (auxNode != nullptr)
       {
           if(auxNode->item() == it){
@@ -340,16 +315,6 @@ class SList
 
           }
 
-=======
-      while (auxNode->has_next())
-      {
-          if(auxNode->item() == it){
-
-              return true;
-
-          }
-
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
           auxNode = auxNode->next();
       }
 
@@ -375,7 +340,6 @@ class SList
           out<<"[]";
       }else{
 
-<<<<<<< HEAD
           out<<"[";
 
           while (auxNode != nullptr)
@@ -386,15 +350,6 @@ class SList
               
           }
 
-=======
-          out<<"[ ";
-          while (auxNode->hasNext())
-          {
-              out<<" "<<auxNode->item();
-              auxNode = auxNode->next();
-
-          }
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
           out<<" ]";
       }
       
@@ -417,11 +372,7 @@ class SList
       assert(!is_empty());
       
       //TODO
-<<<<<<< HEAD
       current_->set_item(new_v);
-=======
-      current->set_item(new_v);
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
 
       assert(current()==new_v);
   }
@@ -437,7 +388,6 @@ class SList
       //TODO
       if (is_empty())
       {
-<<<<<<< HEAD
 
           head = SNode<T>::create(new_it, head);
           current_ = head;
@@ -453,17 +403,6 @@ class SList
 
 
 
-=======
-
-          head = SNode<T>::create(new_it, nullptr);
-          current = head;
-
-      }
-      
-      auto newHead = SNode<T>::create(new_it, head);
-      head = newHead;
-
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
       assert(front()==new_it);
   }
 
@@ -486,7 +425,6 @@ class SList
       //TODO
       if (is_empty())
       {
-<<<<<<< HEAD
           push_front(new_it);
 
       }else{
@@ -494,15 +432,6 @@ class SList
           auto newNode = SNode<T>::create(new_it, current_->next());
           current_->set_next(newNode);
           //current_ = newNode;
-=======
-          push_front(new_it, head);
-          current = head;
-
-      }else{
-
-          auto newNode = SNode<T>::create(new_it, current->next());
-          current->set_next(newNode);
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
 
       }
 
@@ -519,7 +448,6 @@ class SList
   {
       assert(!is_empty());
       //TODO
-<<<<<<< HEAD
 
       //T old_head;
 
@@ -539,13 +467,6 @@ class SList
 
 
      //assert(is_empty() || (front()==old_head));
-=======
-    
-      auto old_head = head->next()->item();
-      head = head->next();
-      current = head;
-      assert(is_empty() || (front()==old_head));
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
   }
 
 
@@ -568,7 +489,6 @@ class SList
       //TODO:
       //Study three cases: remove from head, remove from last and
       //remove from middle.
-<<<<<<< HEAD
       if (current_ == head)
       {
           pop_front();
@@ -583,27 +503,10 @@ class SList
           
           auxNode->set_next(nullptr);
           current_ = auxNode;
-=======
-      if (current == head)
-      {
-          pop_front();
-
-      }else if(!current->has_next()){
-
-          auto auxNode = head;
-          while (auxNode != current)
-          {
-              aux = aux->next();
-          }
-          
-          auxNode->set_next(nullptr);
-          current = auxNode;
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
 
       }else{
 
           auto auxNode = head;
-<<<<<<< HEAD
           while (auxNode->next() != current_)
           {
               auxNode = auxNode->next();
@@ -611,15 +514,6 @@ class SList
           
           auxNode->set_next(current_->next());
           current_ = current_->next();
-=======
-          while (auxNode != current)
-          {
-              aux = aux->next();
-          }
-          
-          auxNode->set_next(current->next());
-          current = current->next();
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
 
       }
       
@@ -640,12 +534,8 @@ class SList
 #endif
 
       //TODO
-<<<<<<< HEAD
 
       current_= current_->next();
-=======
-      current= current->nex();
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
       assert(current()==old_next);
   }
 
@@ -657,11 +547,7 @@ class SList
   void goto_first()
   {
       assert(!is_empty());
-<<<<<<< HEAD
       current_= head;
-=======
-      current= head;
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
       assert(current()==front());
   }
 
@@ -743,12 +629,7 @@ protected:
 
   //TODO
   typename SNode<T>::Ref head;
-<<<<<<< HEAD
   typename SNode<T>::Ref current_;
-=======
-  typename SNode<T>::Ref current;
-
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
 
 
 };

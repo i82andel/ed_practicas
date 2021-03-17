@@ -70,13 +70,8 @@ class Stack
   /** @brief is the list empty?.*/
   bool is_empty () const
   {
-<<<<<<< HEAD
       
       return lista->is_empty();
-=======
-      //TODO
-      return lista.->is_empty();
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
   }
 
   /** @brief get the top item.
@@ -85,13 +80,8 @@ class Stack
   const T& top() const
   {
       assert(! is_empty());
-<<<<<<< HEAD
       //TODO
       return lista->front();
-=======
-        
-      return T();
->>>>>>> 74b6454e03b87cf93523210b917951a6a5bd85ac
   }
 
   /**
@@ -139,7 +129,7 @@ class Stack
 
 protected:
 
-  typename SList<T>::Ref lista;
+  //TODO:
   //Hint:  delegate in SList<T> to implement the TAD Stack.
   typename SList<T>::Ref lista;
 
