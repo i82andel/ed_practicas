@@ -181,8 +181,50 @@ class SList
 
       //TODO
       //Hint: use std::istringstream to convert a token into generic T type.
-      
-      return list;
+
+      char skip;
+      T aux;
+      std::string cad;
+      in>>cad;
+      std::istringstream ss(cad);
+      int cont = 0;
+
+      if (ss.str() == "[]")
+      {
+
+        return list;
+
+      }else{
+
+
+          while (ss)
+          {
+            if(ss.peek() == '['){
+                cont++;
+                ss>>skip;
+            }else if(ss.peek() == ']'){
+                cont--;
+                ss>>skip;
+
+            }else if (ss.peek() != ' ')
+            {
+              ss >> aux;
+                list->insert(aux);
+
+            }else{
+              ss>>skip;
+            } 
+          }
+
+
+      }
+
+      if(cont != 0){
+
+           throw std::runtime_error ("Wrong input format.");
+        }
+
+        else return list;
   }
 
   /** @}*/

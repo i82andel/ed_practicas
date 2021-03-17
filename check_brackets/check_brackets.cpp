@@ -39,10 +39,11 @@ protected:
 size_t
 check_brackets(std::istream& input)
 {
-    size_t pos = 0;
+    size_t pos = 0,cont = 0;
     bool unbalanced_found = false;
     auto stack = Stack<Bracket>::create();
     char next_c;
+    
     while(input && !unbalanced_found)
     {
         ++pos;
@@ -52,19 +53,45 @@ check_brackets(std::istream& input)
             if (next_c == '(' || next_c == '{' || next_c == '[')
             {
                 //TODO: process an opening bracket.
+                stack->push(Bracket(next_c,pos));
+                
             }
             else if (next_c == ')' || next_c == '}' || next_c == ']')
             {
                 //TODO: process a closing bracket. */
+                if (stack->is_empty() || !stack->top().match_with(next_c))
+                {
+                    stack->push(Bracket(next_c, pos));
+                    unbalanced_found = true;
+                    
+                    
+                }else{
+
+                    stack->pop();
+                    
+
+                }
+
             }
         }
     }
 
-    size_t ret_val = 0;
+
 
     //TODO: Compute the return value.
 
-    return ret_val;
+    size_t ret_val ;
+
+    if( !stack->is_empty() ){
+            
+            ret_val = stack->top().pos();
+            
+        }
+
+        else ret_val = 0;
+
+        return ret_val;
+
 }
 
 
