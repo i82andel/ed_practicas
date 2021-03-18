@@ -29,6 +29,10 @@ public:
     BTNode (T const& it=T(), BTNode<T>::Ref left=nullptr, BTNode<T>::Ref right=nullptr)
     {
         //TODO
+        item_ = it;
+        leftNode_ = left;
+        rightNode_ = right;
+
     }
 
     /**
@@ -56,35 +60,37 @@ public:
     const T& item() const
     {
         //TODO
-        return T();
+        return item_;
     }
 
     /** @brief Has it a left child?*/
     bool has_left() const
     {
         //TODO
-        return false;
+        if (leftNode_ == nullptr) return false;
+        return true;
     }
 
     /** @brief get the left child.*/
     BTNode<T>::Ref left() const
     {
         //TODO
-        return nullptr;
+        return leftNode_;
     }
 
     /** @brief Has it a right child? */
     bool has_right() const
     {
         //TODO
-        return false;
+        if (rightNode_ == nullptr) return false;
+        return true;
     }
 
     /** @brief get the right child.*/
     BTNode<T>::Ref right() const
     {
         //TODO
-        return nullptr;
+        return rightNode_;
     }
     /** @}*/
 
@@ -95,35 +101,43 @@ public:
     void set_item(const T& new_it)
     {
         //TODO
+        item_ = new_it;
     }
 
     /** @brief Set the left child.*/
     void set_left(BTNode<T>::Ref new_child)
     {
         //TODO
+        leftNode_ = new_child;
     }
 
     /** @brief Remove link to the left child. */
     void remove_left()
     {
         //TODO: hint see std::share_ptr doc.
+        leftNode_ = nullptr;
     }
 
     /** @brief Set the right child.*/
     void set_right(BTNode<T>::Ref new_child)
     {
         //TODO
+        rightNode_= new_child;
     }
 
     /** @brief Remove linkt to the right child. */
     void remove_right()
     {
         //TODO: hint see std::share_ptr doc.
+        rightNode_ = nullptr;
     }
 
 protected:
     //TODO
     //Hint: use typename SNode<T>::Ref for the link to other nodes.
+    T item_;
+    BTNode<T>::Ref leftNode_;
+    BTNode<T> ::Ref rightNode_;
 };
 
 /**
@@ -150,7 +164,8 @@ class BTree
      */
     BTree ()
     {
-        //TODO
+        root_ = null;
+        assert(is_empty());
     }
 
   /** @brief Create Leaf BTree.
@@ -159,6 +174,7 @@ class BTree
   BTree (const T& item)
   {
       //TODO
+      root_ = BTNode<T>::create(item);
   }
 
   /**
@@ -220,6 +236,7 @@ class BTree
   bool is_empty () const
   {
       //TODO
+      if (root_ == nullprt) return true;
       return false;
   }
 
@@ -230,7 +247,7 @@ class BTree
   {
       assert(!is_empty());
       //TODO
-      return T();
+      return root_->item();
   }
 
   /**
@@ -244,7 +261,6 @@ class BTree
       BTree<T>::Ref l_subtree;
 
       //TODO
-
       //
 
       return l_subtree;
@@ -267,8 +283,7 @@ class BTree
       return r_subtree;
   }
 
-  /**
-   * @brief Fold a binary tree.
+  /** a binary tree.
    *
    * The output format will be:
    * '[]' for the empty tree.
@@ -305,6 +320,7 @@ class BTree
   {
       assert(!is_empty());
       //TODO
+      root_->set_item(new_it);
   }
 
   /**
@@ -315,6 +331,7 @@ class BTree
   void create_root(T const& item)
   {
       //TODO
+      root_ = BTNode<T>::create(item);
       assert(!is_empty());
   }
 
@@ -325,6 +342,7 @@ class BTree
   void remove_root()
   {
       //TODO
+      root_ = nullptr;
       assert(is_empty());
   }
 
@@ -337,6 +355,7 @@ class BTree
   {
       assert(!is_empty());
       //TODO
+      root_->set_left(new_left);
   }
 
   /**
@@ -347,16 +366,18 @@ class BTree
   {
       assert(!is_empty());
       //TODO
+      root_->set_left(nullptr);
   }
 
   /**
    * @brief Attach a new subtree as right child of root.
    * @param t is the new right subtree.
    */
-  void set_right(typename BTree<T>::Ref t)
+  void set_right(typename BTree<T>::Ref new_right)
   {
       assert(!is_empty());
       //TODO
+      root_->set_right(new_right);
   }
 
   /**
@@ -367,6 +388,7 @@ class BTree
   {
       assert(!is_empty());
       //TODO
+      root_->set_right(nullptr);
   }
 
   /** @}*/
@@ -374,6 +396,7 @@ class BTree
 protected:
 
   //TODO
+  typename BTNode<T>::Ref root_;
 
 };
 #endif
