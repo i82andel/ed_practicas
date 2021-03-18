@@ -26,7 +26,7 @@ public:
     /** @brief Create a BTNode.
      * @post n_children() == 0
      */
-    BTNode (T const& it, BTNode<T>::Ref left=nullptr, BTNode<T>::Ref right=nullptr)
+    BTNode (T const& it=T(), BTNode<T>::Ref left=nullptr, BTNode<T>::Ref right=nullptr)
     {
         //TODO
         item_ = it;
@@ -47,44 +47,25 @@ public:
         return std::make_shared<BTNode<T>> (it, left, right);
     }
 
-   /** a binary tree.
-   *
-   * The output format will be:
-   * '[]' for the empty BNode.
-   * '[ <item> <left-subtree> <right-subtree> ']'
-   *
-   * For example a tree with three nodes:
-   * "[]"
-   *
-   * @param out is the output stream.
-   * @param tree is the tree.
-   * @return the output stream.
-   * @pre tree!=nullptr
-   */
-    std::ostream& fold(std::ostream& out, BTNode<T>::Ref next) const
-    {
-      
-      //TODO
-      if (next = nullptr)
-      {
-          out<<"[]";
+    std::ostream& fold(std::ostream& out, BTNode<T>::Ref next) const{
 
-      }else{
+    	if (next == nullptr)
+    	{
+    		out<<"[]";
 
-          out<<"[";
-          out<<item;
+    	}else{
 
-          fold(out, leftNode_);
-          fold(out, rightNode_);
+    		out<<"[";
+    		out<<item_;
 
-          out<<"]";
+    		fold(out, leftNode_);
+    		fold(out, rightNode_);
 
-      }
+    		out<<"]";
+    	}
 
-      //
-      return out;
+    	return out;
     }
-
     /** @brief Destroy a BTNode. **/
     ~BTNode()
     {}
@@ -288,7 +269,6 @@ class BTree
       return root_->item();
   }
 
-
   /**
    * @brief Get the left subtree.
    * @return a reference to the left subtree.
@@ -337,13 +317,11 @@ class BTree
    * @return the output stream.
    * @pre tree!=nullptr
    */
-
   std::ostream& fold(std::ostream& out) const
   {
       //TODO
 
-        
-        
+  		root_->fold(out, root_);
 
       //
       return out;
