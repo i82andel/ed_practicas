@@ -261,6 +261,7 @@ class BTree
       BTree<T>::Ref l_subtree;
 
       //TODO
+        l_subtree->root_ = root_->left();
       //
 
       return l_subtree;
@@ -277,7 +278,7 @@ class BTree
       BTree<T>::Ref r_subtree;
 
       //TODO
-
+      l_subtree->root_ = root_->right();
       //
 
       return r_subtree;
@@ -355,7 +356,7 @@ class BTree
   {
       assert(!is_empty());
       //TODO
-      root_->set_left(new_left);
+      root_->set_left(new_left->root_);
   }
 
   /**
@@ -377,7 +378,7 @@ class BTree
   {
       assert(!is_empty());
       //TODO
-      root_->set_right(new_right);
+      root_->set_right(new_right->root_);
   }
 
   /**
