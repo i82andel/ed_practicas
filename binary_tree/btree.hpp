@@ -202,7 +202,7 @@ class BTree
      */
     BTree ()
     {
-        root_ = null;
+        root_ = nullptr;
         assert(is_empty());
     }
 
@@ -274,7 +274,7 @@ class BTree
   bool is_empty () const
   {
       //TODO
-      if (root_ == nullprt) return true;
+      if (root_ == nullptr) return true;
       return false;
   }
 
@@ -317,7 +317,7 @@ class BTree
       BTree<T>::Ref r_subtree;
 
       //TODO
-      l_subtree->root_ = root_->right();
+      r_subtree->root_ = root_->right();
       //
 
       return r_subtree;
