@@ -67,7 +67,7 @@ public:
       //TODO
       if (next = nullptr)
       {
-          out<<"[]"
+          out<<"[]";
 
       }else{
 
