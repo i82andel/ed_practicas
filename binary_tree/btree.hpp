@@ -26,7 +26,7 @@ public:
     /** @brief Create a BTNode.
      * @post n_children() == 0
      */
-    BTNode (T const& it=T(), BTNode<T>::Ref left=nullptr, BTNode<T>::Ref right=nullptr)
+    BTNode (T const& it, BTNode<T>::Ref left=nullptr, BTNode<T>::Ref right=nullptr)
     {
         //TODO
         item_ = it;
@@ -45,6 +45,44 @@ public:
     static typename BTNode<T>::Ref create(T const& it, BTNode<T>::Ref left=nullptr, BTNode<T>::Ref right=nullptr)
     {
         return std::make_shared<BTNode<T>> (it, left, right);
+    }
+
+   /** a binary tree.
+   *
+   * The output format will be:
+   * '[]' for the empty BNode.
+   * '[ <item> <left-subtree> <right-subtree> ']'
+   *
+   * For example a tree with three nodes:
+   * "[]"
+   *
+   * @param out is the output stream.
+   * @param tree is the tree.
+   * @return the output stream.
+   * @pre tree!=nullptr
+   */
+    std::ostream& fold(std::ostream& out, BTNode<T>::Ref next) const
+    {
+      
+      //TODO
+      if (next = nullptr)
+      {
+          out<<"[]"
+
+      }else{
+
+          out<<"[";
+          out<<item;
+
+          fold(out, leftNode_);
+          fold(out, rightNode_);
+
+          out<<"]";
+
+      }
+
+      //
+      return out;
     }
 
     /** @brief Destroy a BTNode. **/
@@ -250,6 +288,7 @@ class BTree
       return root_->item();
   }
 
+
   /**
    * @brief Get the left subtree.
    * @return a reference to the left subtree.
@@ -298,10 +337,13 @@ class BTree
    * @return the output stream.
    * @pre tree!=nullptr
    */
+
   std::ostream& fold(std::ostream& out) const
   {
       //TODO
 
+        
+        
 
       //
       return out;
