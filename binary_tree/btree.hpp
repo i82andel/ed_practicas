@@ -292,7 +292,7 @@ class BTree
         if (token == "[]")
         {
 
-        	tree->set_left(nullptr);
+        	tree->root_->set_left(nullptr);
 
         }else{
 
@@ -307,7 +307,7 @@ class BTree
         if (token == "[]")
         {
         	
-        	tree->set_right(nullptr);
+        	tree->root_->set_right(nullptr);
 
         }else{
 
