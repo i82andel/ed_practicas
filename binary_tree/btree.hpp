@@ -212,7 +212,10 @@ class BTree
    */
   static typename BTree<T>::Ref create(T const& item)
   {
-      return std::make_shared<BTree<T>>(item);
+      auto tree = std::make_shared<BTree<T>>();
+      tree->item(item);
+      return tree;
+
   }
 
   /**
@@ -231,15 +234,126 @@ class BTree
   static typename BTree<T>::Ref create (std::istream& in) noexcept(false)
   {
       auto tree = BTree<T>::create();
-      std::string token;
+      std::string token, aux;
       in >> token;
+      T item;
       if (!in)
-          throw std::runtime_error("Wrong input format.");
+      {
+      		throw std::runtime_error("Wrong input format.");
+      }
 
       //TODO
+    
+      char skip;
+      std::getline(in, aux, '\n');
 
-      return tree;
-  }
+      /*if (aux[0] != '[' or aux[aux.size()-1] != ']'){
+         
+         throw std::runtime_error("Wrong input format.");
+
+      }*/
+      
+
+      in>>token;
+      if (token == "[]") { 
+
+        return tree;
+
+      }
+
+      	in>>skip;
+      	if (!in){
+      		
+      		throw std::runtime_error("Wrong input format.");
+
+      	}
+
+      	std::istringstream translater(token);
+
+
+        T itemAux;
+        translater >> itemAux;
+        tree->set_item(itemAux);
+        in >> token;
+        if (!in){
+      		
+      		throw std::runtime_error("Wrong input format.");
+      		
+      	}
+
+
+        translater>>skip;
+        in>>skip;
+        if (!in){
+      		
+      		throw std::runtime_error("Wrong input format.");
+      		
+      	}
+
+        translater >> token;
+        
+        
+        if (token == "[]")
+        {
+
+        	tree->set_left(nullptr);
+
+        }else{
+
+        	auto left_tree = BTree<T>::create(in);
+			tree->set_left(left_tree);
+
+        }
+
+
+        translater >> token;
+        
+        if (token == "[]")
+        {
+        	
+        	tree->set_right(nullptr);
+
+        }else{
+
+        	auto right_tree = BTree<T>::create(in);
+        	tree->set_right(right_tree);
+
+        }
+
+        return tree;
+
+      }
+
+      
+
+
+    /*if (token == '[')
+    {
+        in >>token;
+        in >> item;
+   
+        auto left_tree = BTree<T>::create(in);
+		tree->set_left(left_tree);
+
+        auto right_tree = BTree<T>::create(in);
+        tree->set_right(right_tree);
+        
+        in >>token;
+
+		if (token != ']')
+		{
+
+            throw std::runtime_error("Wrong input format.");
+
+		}        
+
+    }
+
+    return tree;
+      
+  }*/
+
+
 
   /** @brief Destroy a BTree.**/
   ~BTree()
@@ -365,6 +479,8 @@ class BTree
       //TODO
       root_ = nullptr;
       assert(is_empty());
+
+      
   }
 
   /**
