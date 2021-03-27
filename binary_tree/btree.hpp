@@ -246,7 +246,7 @@ class BTree
       char skip;
       std::getline(in, aux, '\n');
 
-      if (aux[0] != '[' or aux[aux.size()-1] != ']'){
+      if (aux[1] != '[' or aux[aux.size()-1] != ']'){
          
          throw std::runtime_error("Wrong input format.");
 
@@ -259,7 +259,6 @@ class BTree
 
       }
 
-      	in>>skip;
       	if (!in){
       		
       		throw std::runtime_error("Wrong input format.");
@@ -281,7 +280,6 @@ class BTree
       	}
 
 
-        in>>skip;
         if (!in){
       		
       		throw std::runtime_error("Wrong input format.");
@@ -304,7 +302,7 @@ class BTree
         }
 
 
-        translater >> token;
+        in >> token;
         
         if (token == "[]")
         {
