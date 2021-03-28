@@ -70,20 +70,12 @@ size_t compute_size (typename BTree<T>::Ref t)
 
     }
 
+    ret_val++;
 
+    ret_val = ret_val + compute_size<T>(t->left());
+    ret_val = ret_val + compute_size<T>(t->right());
 
-    if (!t->left()->is_empty())
-    {
-
-        ret_val = ret_val + compute_size<T>(t->left());
-
-    }
-    if (!t->right()->is_empty())
-    {
-        
-        ret_val = ret_val + compute_size<T>(t->right());
-
-    }
+    
     
 
     assert(!t->is_empty() || ret_val==0);

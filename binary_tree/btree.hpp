@@ -293,32 +293,6 @@ class BTree
       
 
 
-    /*if (token == '[')
-    {
-        in >>token;
-        in >> item;
-   
-        auto left_tree = BTree<T>::create(in);
-		tree->set_left(left_tree);
-
-        auto right_tree = BTree<T>::create(in);
-        tree->set_right(right_tree);
-        
-        in >>token;
-
-		if (token != ']')
-		{
-
-            throw std::runtime_error("Wrong input format.");
-
-		}        
-
-    }
-
-    return tree;
-      
-  }*/
-
 
 
   /** @brief Destroy a BTree.**/
@@ -357,7 +331,7 @@ class BTree
   typename BTree<T>::Ref left() const
   {
       assert(!is_empty());
-      BTree<T>::Ref l_subtree;
+      auto l_subtree = BTree<T>::create();
 
       //TODO
         l_subtree->root_ = root_->left();
@@ -374,7 +348,7 @@ class BTree
   typename BTree<T>::Ref right() const
   {
       assert(!is_empty());
-      BTree<T>::Ref r_subtree;
+      auto r_subtree = BTree<T>::create();
 
       //TODO
       r_subtree->root_ = root_->right();
