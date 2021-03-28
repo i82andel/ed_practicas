@@ -56,13 +56,13 @@ public:
     	}else{
 
     		out<<"[ ";
-    		out<<item_;
+    		out<<next->item_;
     		out<<' ';
 
 
-    		fold(out, leftNode_);
+    		fold(out, next->leftNode_);
     		out<<' ';
-    		fold(out, rightNode_);
+    		fold(out, next->rightNode_);
     		out<<" ]";
 
     	}
@@ -277,35 +277,13 @@ class BTree
       	}
 
 
-        in >> token;
-        
-        
-        if (token == "[]")
-        {
 
-        	tree->root_->set_left(nullptr);
+        auto left_tree = BTree<T>::create(in);
+		tree->set_left(left_tree);
 
-        }else{
+        auto right_tree = BTree<T>::create(in);
+        tree->set_right(right_tree);
 
-        	auto left_tree = BTree<T>::create(in);
-			tree->set_left(left_tree);
-
-        }
-
-
-        in >> token;
-        
-        if (token == "[]")
-        {
-        	
-        	tree->root_->set_right(nullptr);
-
-        }else{
-
-        	auto right_tree = BTree<T>::create(in);
-        	tree->set_right(right_tree);
-
-        }
 
 		in>>skip;
         return tree;
@@ -425,7 +403,6 @@ class BTree
 
   		root_->fold(out, root_);
 
-      //
       return out;
   }
 
