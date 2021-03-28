@@ -55,13 +55,16 @@ public:
 
     	}else{
 
-    		out<<"[";
+    		out<<"[ ";
     		out<<item_;
+    		out<<' ';
+
 
     		fold(out, leftNode_);
+    		out<<' ';
     		fold(out, rightNode_);
+    		out<<" ]";
 
-    		out<<"]";
     	}
 
     	return out;
@@ -236,6 +239,7 @@ class BTree
       auto tree = BTree<T>::create();
       std::string token, aux;
 
+
       if (!in)
       {
       		throw std::runtime_error("Wrong input format.");
@@ -244,13 +248,6 @@ class BTree
       //TODO
     
       char skip;
-      std::getline(in, aux, '\n');
-
-      if (aux[1] != '[' or aux[aux.size()-1] != ']'){
-         
-         throw std::runtime_error("Wrong input format.");
-
-      }
       
       in >> token;
       if (token == "[]") { 
@@ -271,7 +268,7 @@ class BTree
 
         T itemAux;
         translater >> itemAux;
-        tree->set_item(itemAux);
+        tree->create_root(itemAux);
 
         if (!in){
       		
@@ -279,12 +276,6 @@ class BTree
       		
       	}
 
-
-        if (!in){
-      		
-      		throw std::runtime_error("Wrong input format.");
-      		
-      	}
 
         in >> token;
         
@@ -316,6 +307,7 @@ class BTree
 
         }
 
+		in>>skip;
         return tree;
 
       }
