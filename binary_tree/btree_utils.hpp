@@ -199,7 +199,7 @@ postfix_process(typename BTree<T>::Ref tree, Processor& p)
     {
         return true;
     }
-    
+
     if(tree->has_left()==true){
         postfix_process<T>(tree->left(),p);
     }
@@ -265,17 +265,17 @@ bool check_btree_in_order(typename BTree<T>::Ref const& tree)
     {
         return true;
 
-    }else if (tree->right()->is_empty() || tree->right()->item() <= tree->item() || 
-    !check_btree_in_order<T>(tree->left()) || !check_btree_in_order<T>(tree->right()))
-    {
-        return false;
     }
-    else if (tree->left()->is_empty() || tree->left()->item() >= tree->item() || 
-    !check_btree_in_order<T>(tree->left()) || !check_btree_in_order<T>(tree->right()))
-    {
-        return false;
-    }
+    
+    if (!tree->right()->is_empty() && tree->right()->item() <= tree->item()) return false;
+    if (!tree->left()->is_empty() && tree->left()->item() >= tree->item()) return false;
+    if (!tree->left()->is_empty() && !check_btree_in_order<T>(tree->left())) return false;
+    if (!tree->right()->is_empty() && !check_btree_in_order<T>(tree->right())) return false;
+
+    return true;
+
 }
+    
 
 /**
  * @brief Search a item into the tree.
@@ -291,10 +291,26 @@ template<class T>
 bool has_in_order(typename BTree<T>::Ref tree, T const& v)
 {
     assert(check_btree_in_order<T>(tree));
-    bool ret_val = false;
+    bool ret_val = true;
 
     //TODO
 
+    if (tree->is_empty())
+    {
+        return false;
+    }
+    else
+    {
+        if (v > tree->item())
+        {
+            return has_in_order<T>(tree->right(),v);
+        }
+        else if (v < tree->item())
+        {
+            return has_in_order<T>(tree->left(),v);
+        }
+
+    }
 
     //
 
