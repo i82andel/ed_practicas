@@ -218,6 +218,55 @@ postfix_process(typename BTree<T>::Ref tree, Processor& p)
     return retVal;
 }
 
+template<class T>
+int minValue(typename BTree<T>::Ref const& tree){
+
+    int aux = tree->item();
+
+    if (tree->is_empty())
+    {
+        return aux;
+    }
+
+    if (aux > minValue(tree->left()))
+    {
+        aux = minValue(tree->left());
+
+    }else if (aux > minValue(tree->right()))
+    {
+        aux = minValue(tree->right());
+    }
+    
+    return aux;
+
+}
+
+template<class T>
+int maxValue(typename BTree<T>::Ref const& tree){
+
+   int aux = tree->item();
+
+    if (tree->is_empty())
+    {
+        return aux;
+    }
+
+    if (aux < minValue(tree->left()))
+    {
+        aux = minValue(tree->left());
+
+    }else if (aux < minValue(tree->right()))
+    {
+        aux = minValue(tree->right());
+    }
+    
+    return aux;
+
+
+
+}
+
+
 
 /**
  * @brief Bread-first processing of a btree.
@@ -277,17 +326,21 @@ bool check_btree_in_order(typename BTree<T>::Ref const& tree)
 
     }
 
-    if ((tree->right()->is_empty() == false && tree->right()->item() < tree->item()) || (tree->left()->is_empty() == false && tree->left()->item() > tree->item()) )
-    {
+    if ((tree->right()->is_empty() == false && tree->right()->item() < tree->item()){
+
         return false;
 
-    }else{
-
-        return true;
-
     }
-
     
+    
+    if (tree->left()->is_empty() == false && tree->left()->item() > tree->item()) )
+    {
+        return false;
+    }
+   
+
+    return true;
+
 }
     
 
