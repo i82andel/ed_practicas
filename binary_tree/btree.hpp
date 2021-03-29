@@ -215,9 +215,8 @@ class BTree
    */
   static typename BTree<T>::Ref create(T const& item)
   {
-      auto tree = std::make_shared<BTree<T>>();
-      tree->item(item);
-      return tree;
+       return std::make_shared<BTree<T>>(item);
+
 
   }
 
