@@ -67,7 +67,6 @@ size_t compute_size (typename BTree<T>::Ref t)
 
         return 0;
 
-
     }
 
     ret_val++;
@@ -105,6 +104,25 @@ prefix_process(typename BTree<T>::Ref tree, Processor& p)
     bool retVal = true;
 
     //TODO
+    
+    if (tree->is_empty())
+    {
+        return true;
+    }
+    
+
+    if(p.apply(tree)==true){
+        if(tree->has_left()==true)
+        prefix_process<T>(tree->left(),p);
+        if(tree->has_right()==true)
+        prefix_process<T>(tree->right(),p);
+
+        return true;
+
+    }
+    else{
+        return false;
+    }
 
     return retVal;
 }
@@ -132,6 +150,25 @@ infix_process(typename BTree<T>::Ref tree, Processor& p)
 
     //TODO
 
+    if (tree->is_empty())
+    {
+        return true;
+    }
+
+    if(tree->has_left()==true){
+        infix_process<T>(tree->left(),p);
+    }
+    retVal = p.apply(tree);
+    if(tree->has_right()==true){
+        infix_process<T>(tree->right(),p);
+    }
+    if(retVal == true){
+        return true;
+    }
+    else{
+        return false;
+    }
+    
     return retVal;
 }
 
@@ -206,19 +243,20 @@ bool check_btree_in_order(typename BTree<T>::Ref const& tree)
     //TODO
 
     
-    if (tree->is_empty()) return ret_val;
-
     if (tree->left()->is_empty() && tree->right()->is_empty())
     {
         return true;
 
-    }else if (tree->right()->item() <= tree->item() || tree->left()->item() > tree->item() || 
+    }else if (tree->right()->is_empty() || tree->right()->item() <= tree->item() || 
     !check_btree_in_order<T>(tree->left()) || !check_btree_in_order<T>(tree->right()))
     {
-        return false
+        return false;
     }
-    
-    return true;
+    else if (tree->left()->is_empty() || tree->left()->item() >= tree->item() || 
+    !check_btree_in_order<T>(tree->left()) || !check_btree_in_order<T>(tree->right()))
+    {
+        return false;
+    }
 }
 
 /**
