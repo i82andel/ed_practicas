@@ -112,9 +112,9 @@ prefix_process(typename BTree<T>::Ref tree, Processor& p)
     
 
     if(p.apply(tree)==true){
-        if(tree->has_left()==true)
+        if(!tree->left()->is_empty())
         prefix_process<T>(tree->left(),p);
-        if(tree->has_right()==true)
+        if(!tree->right->is_empty())
         prefix_process<T>(tree->right(),p);
 
         return true;
@@ -155,11 +155,11 @@ infix_process(typename BTree<T>::Ref tree, Processor& p)
         return true;
     }
 
-    if(tree->has_left()==true){
+    if(!tree->left()->is_empty()){
         infix_process<T>(tree->left(),p);
     }
     retVal = p.apply(tree);
-    if(tree->has_right()==true){
+    if(!tree->right->is_empty()){
         infix_process<T>(tree->right(),p);
     }
     if(retVal == true){
@@ -200,10 +200,10 @@ postfix_process(typename BTree<T>::Ref tree, Processor& p)
         return true;
     }
 
-    if(tree->has_left()==true){
+    if(!tree->left()->is_empty()){
         postfix_process<T>(tree->left(),p);
     }
-     if(tree->has_right()==true){
+     if(!tree->right->is_empty()){
         postfix_process<T>(tree->right(),p);
     }
     if(p.apply(tree)==true){
