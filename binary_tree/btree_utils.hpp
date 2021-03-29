@@ -195,6 +195,24 @@ postfix_process(typename BTree<T>::Ref tree, Processor& p)
 
     //TODO
 
+    if (tree->is_empty())
+    {
+        return true;
+    }
+    
+    if(tree->has_left()==true){
+        postfix_process<T>(tree->left(),p);
+    }
+     if(tree->has_right()==true){
+        postfix_process<T>(tree->right(),p);
+    }
+    if(p.apply(tree)==true){
+        return true;
+    }
+     else{
+        return false;
+    }
+
     return retVal;
 }
 
