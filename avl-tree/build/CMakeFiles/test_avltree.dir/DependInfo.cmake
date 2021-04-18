@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/aneri/i82andel/binary_tree/test_btree.cpp" "/home/aneri/i82andel/binary_tree/build/CMakeFiles/test_btree.dir/test_btree.cpp.o"
+  "/home/aneri/i82andel/avl-tree/test_avltree.cpp" "/home/aneri/i82andel/avl-tree/build/CMakeFiles/test_avltree.dir/test_avltree.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

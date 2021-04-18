@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/aneri/i82andel/binary_tree
+CMAKE_SOURCE_DIR = /home/aneri/i82andel/avl-tree
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/aneri/i82andel/binary_tree/build
+CMAKE_BINARY_DIR = /home/aneri/i82andel/avl-tree/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aneri/i82andel/binary_tree/build/CMakeFiles /home/aneri/i82andel/binary_tree/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/aneri/i82andel/avl-tree/build/CMakeFiles /home/aneri/i82andel/avl-tree/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aneri/i82andel/binary_tree/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/aneri/i82andel/avl-tree/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,44 +111,76 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test_btree
+# Target rules for targets named test_avltree
 
 # Build rule for target.
-test_btree: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_btree
-.PHONY : test_btree
+test_avltree: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_avltree
+.PHONY : test_avltree
 
 # fast build rule for target.
-test_btree/fast:
-	$(MAKE) -f CMakeFiles/test_btree.dir/build.make CMakeFiles/test_btree.dir/build
-.PHONY : test_btree/fast
+test_avltree/fast:
+	$(MAKE) -f CMakeFiles/test_avltree.dir/build.make CMakeFiles/test_avltree.dir/build
+.PHONY : test_avltree/fast
 
-test_btree.o: test_btree.cpp.o
+#=============================================================================
+# Target rules for targets named test_bstree
 
-.PHONY : test_btree.o
+# Build rule for target.
+test_bstree: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_bstree
+.PHONY : test_bstree
+
+# fast build rule for target.
+test_bstree/fast:
+	$(MAKE) -f CMakeFiles/test_bstree.dir/build.make CMakeFiles/test_bstree.dir/build
+.PHONY : test_bstree/fast
+
+#=============================================================================
+# Target rules for targets named test_avltnode
+
+# Build rule for target.
+test_avltnode: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_avltnode
+.PHONY : test_avltnode
+
+# fast build rule for target.
+test_avltnode/fast:
+	$(MAKE) -f CMakeFiles/test_avltnode.dir/build.make CMakeFiles/test_avltnode.dir/build
+.PHONY : test_avltnode/fast
+
+test_avltree.o: test_avltree.cpp.o
+
+.PHONY : test_avltree.o
 
 # target to build an object file
-test_btree.cpp.o:
-	$(MAKE) -f CMakeFiles/test_btree.dir/build.make CMakeFiles/test_btree.dir/test_btree.cpp.o
-.PHONY : test_btree.cpp.o
+test_avltree.cpp.o:
+	$(MAKE) -f CMakeFiles/test_avltree.dir/build.make CMakeFiles/test_avltree.dir/test_avltree.cpp.o
+	$(MAKE) -f CMakeFiles/test_bstree.dir/build.make CMakeFiles/test_bstree.dir/test_avltree.cpp.o
+	$(MAKE) -f CMakeFiles/test_avltnode.dir/build.make CMakeFiles/test_avltnode.dir/test_avltree.cpp.o
+.PHONY : test_avltree.cpp.o
 
-test_btree.i: test_btree.cpp.i
+test_avltree.i: test_avltree.cpp.i
 
-.PHONY : test_btree.i
+.PHONY : test_avltree.i
 
 # target to preprocess a source file
-test_btree.cpp.i:
-	$(MAKE) -f CMakeFiles/test_btree.dir/build.make CMakeFiles/test_btree.dir/test_btree.cpp.i
-.PHONY : test_btree.cpp.i
+test_avltree.cpp.i:
+	$(MAKE) -f CMakeFiles/test_avltree.dir/build.make CMakeFiles/test_avltree.dir/test_avltree.cpp.i
+	$(MAKE) -f CMakeFiles/test_bstree.dir/build.make CMakeFiles/test_bstree.dir/test_avltree.cpp.i
+	$(MAKE) -f CMakeFiles/test_avltnode.dir/build.make CMakeFiles/test_avltnode.dir/test_avltree.cpp.i
+.PHONY : test_avltree.cpp.i
 
-test_btree.s: test_btree.cpp.s
+test_avltree.s: test_avltree.cpp.s
 
-.PHONY : test_btree.s
+.PHONY : test_avltree.s
 
 # target to generate assembly for a file
-test_btree.cpp.s:
-	$(MAKE) -f CMakeFiles/test_btree.dir/build.make CMakeFiles/test_btree.dir/test_btree.cpp.s
-.PHONY : test_btree.cpp.s
+test_avltree.cpp.s:
+	$(MAKE) -f CMakeFiles/test_avltree.dir/build.make CMakeFiles/test_avltree.dir/test_avltree.cpp.s
+	$(MAKE) -f CMakeFiles/test_bstree.dir/build.make CMakeFiles/test_bstree.dir/test_avltree.cpp.s
+	$(MAKE) -f CMakeFiles/test_avltnode.dir/build.make CMakeFiles/test_avltnode.dir/test_avltree.cpp.s
+.PHONY : test_avltree.cpp.s
 
 # Help Target
 help:
@@ -158,10 +190,12 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... test_btree"
-	@echo "... test_btree.o"
-	@echo "... test_btree.i"
-	@echo "... test_btree.s"
+	@echo "... test_avltree"
+	@echo "... test_bstree"
+	@echo "... test_avltnode"
+	@echo "... test_avltree.o"
+	@echo "... test_avltree.i"
+	@echo "... test_avltree.s"
 .PHONY : help
 
 

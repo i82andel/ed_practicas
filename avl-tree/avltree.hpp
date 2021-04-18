@@ -8,6 +8,9 @@
 #include <algorithm>
 #include <functional>
 #include <vector>
+#include "avltree.hpp"
+#include <climits>
+
 
 /**
  * @brief a AVLTree's Node.
@@ -62,21 +65,13 @@ public:
     /** @{*/
 
     /** @brief Get the data item.*/
-    const T& item() const{
-
-      return item_;
-
-    }
+    const T& item() const;
 
     /**
      * @brief Get the node's height.
      * @post time analysis: O(1).
      */
-    int height() const{
-
-      return height_;
-
-    }
+    int height() const;
 
     /**
      * @brief Get the balance factor of the node.
@@ -85,61 +80,22 @@ public:
     int balance_factor() const;
 
     /** @brief Has it a parent?*/
-    bool has_parent() const{
-
-      if (parent_ != nullptr)
-      {
-        return true;
-      }
-
-      return false;
-      
-    }
+    bool has_parent() const;
 
     /** @brief get the parent.*/
-    AVLTNode<T>::Ref parent() const{
-
-      return parent_;
-
-    }
+    AVLTNode<T>::Ref parent() const;
 
     /** @brief Has it a left child?*/
-    bool has_left() const{
-
-      if (left_ != nullptr)
-      {
-        return true;
-      }
-
-      return false;
-      
-    }
+    bool has_left() const;
 
     /** @brief get the left child.*/
-    AVLTNode<T>::Ref left() const{
-      
-      return left_;
-
-    }
+    AVLTNode<T>::Ref left() const;
 
     /** @brief Has it a right child? */
-    bool has_right() const{
-      
-      if (right_ != nullptr)
-      {
-        return true;
-      }
-
-      return false;
-
-    }
+    bool has_right() const;
 
     /** @brief get the right child.*/
-    AVLTNode<T>::Ref right() const{
-
-      return right_;
-
-    }
+    AVLTNode<T>::Ref right() const;
 
     /** @}*/
 
@@ -150,99 +106,49 @@ public:
      * @brief Set the data item.
      * @post item() == new_it
      */
-    void set_item(const T& new_it){
-
-      item_ = new_it;
-
-    }
+    void set_item(const T& new_it);
 
     /**
      * @brief Set the parent.
      * @post parent()==new_parent
      */
-    void set_parent(AVLTNode<T>::Ref const& new_parent){
-
-      parent_ = new_parent;
-
-    }
+    void set_parent(AVLTNode<T>::Ref const& new_parent);
 
     /**
      * @brief Remove link to the left child.
      * @post !has_parent()
      */
-    void remove_parent(){
-
-      parent = nullptr;
-
-    }
+    void remove_parent();
 
     /**
      * @brief Set the left child.
      * @post left()==new_child
      */
-    void set_left(AVLTNode<T>::Ref const& new_child){
-
-      left_ = new_child;
-
-    }
+    void set_left(AVLTNode<T>::Ref const& new_child);
 
     /**
      * @brief Remove link to the left child.
      * @post !has_left()
      */
-    void remove_left(){
-
-      left = nullptr;
-
-    }
+    void remove_left();
 
     /**
      * @brief Set the right child.
      * @post right()==new_child
      */
-    void set_right(AVLTNode<T>::Ref const& new_child){
-
-      right_ = new_child;
-
-    }
+    void set_right(AVLTNode<T>::Ref const& new_child);
 
     /**
      * @brief Remove link to the right child.
      * @post !has_right()
      */
-    void remove_right(){
-
-      right_ = nullptr;
-
-    }
+    void remove_right();
 
     /**
      * @brief Compute height.
      * @post Time analysis: O(1)
      */
-    void compute_height(){
-
-      T max;
-      if (!has_left() && !has_left())
-      {
-        max = -1;
-      }
-      
-      if (left_->height() >= right_->height())
-      {
-        
-        max = left_->height();
-
-      }else{
-
-        max = right_->height();
-
-      }
-      
-      return 1 + max;
-      
-    }
-
+    void compute_height();
 
 protected:
 
@@ -250,28 +156,7 @@ protected:
      * @brief Check the AVLTNode invariant.
      * @return true if height() == 1 + max{ left's height, right's height }
      */
-    bool check_height_invariant () const{
-
-      T max;
-      if (left_->height() >= right_->height())
-      {
-        
-        max = left_->height();
-
-      }else{
-
-        max = right_->height();
-
-      }
-
-      if (height_ == 1 + max)
-      {
-        return true
-      }
-      
-      return false;
-      
-    }
+    bool check_height_invariant () const;
 
     //TODO
     T item_;
@@ -307,41 +192,25 @@ class AVLTree
      * @brief Create an empty AVLTree.
      * @post is_empty()
      */
-    AVLTree (){
-       
-       root_ = nullptr;
-
-    }
+    AVLTree ();
 
     /**
      * @brief Create a leaf tree.
      * @post is_empty()
      */
-    AVLTree (T const& item){
-
-      root = new AVLTNode(item);
-
-    }
+    AVLTree (T const& item);
 
     /**
      * @brief Create an empty AVLTree.
      * @return a shared reference to the new tree.
      */
-    static typename AVLTree<T>::Ref create (){
-
-      return std::make_shared<AVLTree<T>> ();
-
-    }
+    static typename AVLTree<T>::Ref create ();
 
     /**
      * @brief Create a leaf tree.
      * @post is_empty()
      */
-    static typename AVLTree<T>::Ref create (T const& item){
-
-      return std::make_shared<AVLTree<T>> (item);
-
-    }
+    static typename AVLTree<T>::Ref create (T const& item);
 
     /**
      * @brief Unfold an AVLTree from an input stream.
@@ -582,10 +451,10 @@ protected:
 
   //TODO
   //Chose a representation for this TAD.
-  
-  AVLTNode<T>::Ref root_;
-  AVLTNode<T>::Ref cursor_;
 
+  AVLTree<T>::Ref root_;
+  AVLTree<T>::Ref cursor_;
+  
   //
 
 };

@@ -116,5 +116,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/test_btree.dir/DependInfo.cmake"
+  "CMakeFiles/test_avltree.dir/DependInfo.cmake"
+  "CMakeFiles/test_bstree.dir/DependInfo.cmake"
+  "CMakeFiles/test_avltnode.dir/DependInfo.cmake"
   )
