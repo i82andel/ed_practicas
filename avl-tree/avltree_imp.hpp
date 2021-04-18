@@ -244,7 +244,7 @@ void AVLTNode<T>::compute_height()
     T max = INT_MIN;
     if (!has_left() && !has_left())
     {
-        max -1;
+        max = -1;
     }
     
     if (has_left() && right_->height() > max)
@@ -260,7 +260,7 @@ void AVLTNode<T>::compute_height()
 
     }
       
-    return 1 + max;
+    height_ =  1 + max;
     //
     assert(check_height_invariant());
 }
@@ -375,7 +375,7 @@ bool AVLTree<T>::is_empty () const
 template <class T>
 T const& AVLTree<T>::item() const
 {
-    return root->item();
+    return root_->item();
 }
 
 template <class T>
@@ -391,9 +391,9 @@ template <class T>
 bool AVLTree<T>::current_exists() const
 {
     //TODO
-    if (cursor != nullptr)
+    if (cursor_ != nullptr)
     {
-        /* code */
+        return true;
     }
     
     return false;
@@ -404,7 +404,7 @@ T const& AVLTree<T>::current() const
 {
     assert(current_exists());
     //TODO    
-    return T();
+    return cursor_();
 }
 
 template <class T>
@@ -423,7 +423,9 @@ typename AVLTree<T>::Ref AVLTree<T>::left() const
 {
     assert(!is_empty());
     //TODO
-    return nullptr;
+    AVLTree<T>::Ref raiz = AVLTree<T>:create();
+    raiz = root_left();
+    return raiz;
 }
 
 template <class T>
@@ -431,7 +433,10 @@ typename AVLTree<T>::Ref AVLTree<T>::right() const
 {
     assert(!is_empty());
     //TODO
-    return nullptr;
+    AVLTree<T>::Ref raiz = AVLTree<T>:create();
+    raiz = root_right();
+    return raiz;
+
 }
 
 template <class T>
@@ -449,9 +454,8 @@ int AVLTree<T>::height() const
 {
     int h = -1;
     //TODO
-
     //
-    return h;
+    return root_->height();
 }
 
 template <class T>

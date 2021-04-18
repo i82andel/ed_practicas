@@ -223,6 +223,11 @@ public:
     void compute_height(){
 
       T max;
+      if (!has_left() && !has_left())
+      {
+        max = -1;
+      }
+      
       if (left_->height() >= right_->height())
       {
         
@@ -267,6 +272,7 @@ protected:
       return false;
       
     }
+
     //TODO
     T item_;
     AVLTNode<T>::Ref parent_;
@@ -578,6 +584,7 @@ protected:
   //Chose a representation for this TAD.
   
   AVLTNode<T>::Ref root_;
+  AVLTNode<T>::Ref cursor_;
 
   //
 
