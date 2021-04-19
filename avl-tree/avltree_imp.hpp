@@ -637,7 +637,22 @@ void AVLTree<T>::insert(T const& k)
     if (!search(k))
     {
         //TODO
+        if(is_empty()){
+        current_ = AVLTNode<T>::create(k);
+        root_ = current_;
+        }
 
+        else if(!search(k)){
+            current_ = AVLTNode<T>::create(k);
+
+            if(parent_->item() > k){
+                parent_->set_left(current_);
+            }
+
+            else{
+                parent_->set_right(current_);
+            }
+    }
 
         //
 #ifdef __ONLY_BSTREE__
@@ -649,22 +664,7 @@ void AVLTree<T>::insert(T const& k)
 #endif
     }
     
-    if(is_empty()){
-        current_ = AVLTNode<T>::create(k);
-        root_ = current_;
-    }
-
-    else if(!search(k)){
-        current_ = AVLTNode<T>::create(k);
-
-        if(parent_->item() > k){
-            parent_->set_left(current_);
-        }
-
-        else{
-            parent_->set_right(current_);
-        }
-    }
+    
     
     assert(current_exists());
     assert(current()==k);
@@ -844,6 +844,52 @@ void AVLTree<T>::rotate_right(typename AVLTNode<T>::Ref node)
     //TODO
     //Remenber when set a node A as child of a node B, also is needed set
     // node B as parent of node A.
+
+    auto node2 = node->right();
+
+    if (!node->has_parent())
+    {
+        root_ = node2;
+
+    }else if (node->parewnt()->right() == node)
+    {
+        node->parent->set_right(node2);
+
+    }else{
+
+        node->parent()->set_left(node2);
+        node2->set_parent(node->parent());
+
+    }
+
+    if (node2-has_left())
+    {
+        node.set_right(node2->left());
+        node2->left()->set_parent(node);
+    }else{
+        nose.remove_right();
+        node2->set_left(node);
+        node->set_parent(node2);
+    }
+
+    node->compute_height();
+    node2->compute_height();
+    
+    
+    
+ 
+    // Perform rotation
+    x->right = y;
+    y->left = T2;
+ 
+    // Update heights
+    y->height = max(height(y->left),
+                    height(y->right)) + 1;
+    x->height = max(height(x->left),
+                    height(x->right)) + 1;
+ 
+    // Return new root
+    return x;
 
     //
 }
