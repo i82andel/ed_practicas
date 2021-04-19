@@ -281,7 +281,7 @@ template <class T>
 AVLTree<T>::AVLTree ()
 {
     //TODO
-    root_ = nullptr;
+    root_ = nullptr
     //
     assert(is_a_binary_search_tree());
     assert(is_a_balanced_tree());
@@ -293,7 +293,8 @@ AVLTree<T>::AVLTree (T const& item)
     //TODO
     typename AVLTNode<T>::Ref raiz;
     raiz->set_item(item);
-    root =  raiz;
+    root_ =  raiz;
+    current = root_;
     //
     assert(is_a_binary_search_tree());
     assert(is_a_balanced_tree());
@@ -321,6 +322,35 @@ typename AVLTree<T>::Ref AVLTree<T>::create(std::istream& in) noexcept(false)
         throw std::runtime_error("Wrong input format");
 
     //TODO
+char aux;
+
+      T item;
+      
+      if (token == "[]") { 
+        return tree;
+      }
+
+        if (!in){ throw std::runtime_error("Wrong input format");}
+
+        in>>token;
+        std::istringstream translater(token);
+
+
+        
+        translater >> item;
+        tree->create_root(item);
+
+        if (!in){ throw std::runtime_error("Wrong input format"); }
+
+        auto left_tree = AVLTree<T>::create(in);
+        tree->set_left(left_tree);
+
+        auto right_tree = AVLTree<T>::create(in);
+        tree->set_right(right_tree);
+
+
+        in>>aux;
+        return tree;
 
 
     //
@@ -391,6 +421,21 @@ std::ostream& AVLTree<T>::fold(std::ostream& out) const
 {
     //TODO
 
+    if(is_empty()){ out << "[]";}
+
+      else{
+
+          out<<"[ ";
+          out<< root_->item();
+          out<<" ";
+          auto l_tree = AVLTree<T>::left();
+          auto r_tree = AVLTree<T>::right();
+
+          l_tree->fold(out); 
+          out<<" ";
+          r_tree->fold(out);
+          out<<" ]";
+      }
     //
     return out;
 }
@@ -422,6 +467,7 @@ int AVLTree<T>::current_level() const
     int level = 0;
     //TODO
 
+    return root_->height() - current->height())
     //
     return level;
 }
@@ -462,8 +508,10 @@ int AVLTree<T>::height() const
 {
     int h = -1;
     //TODO
-    //
+     if( is_empty() ) return -1;
     return root_->height();
+    //
+
 }
 
 template <class T>
