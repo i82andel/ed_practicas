@@ -453,7 +453,8 @@ protected:
   //Chose a representation for this TAD.
 
   typename AVLTNode<T>::Ref root_;
-  typename AVLTNode<T>::Ref cursor_;
+  typename AVLTNode<T>::Ref current_;
+  typename AVLTNode<T>::Ref parent_;
   
   //
 
