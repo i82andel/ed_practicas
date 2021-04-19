@@ -281,7 +281,7 @@ template <class T>
 AVLTree<T>::AVLTree ()
 {
     //TODO
-    root_ = nullptr
+    root_ = nullptr;
     //
     assert(is_a_binary_search_tree());
     assert(is_a_balanced_tree());
@@ -467,7 +467,7 @@ int AVLTree<T>::current_level() const
     int level = 0;
     //TODO
 
-    return root_->height() - current->height())
+    return root_->height() - cursor_->height();
     //
     return level;
 }
@@ -478,7 +478,7 @@ typename AVLTree<T>::Ref AVLTree<T>::left() const
     assert(!is_empty());
     //TODO
     AVLTree<T>::Ref raiz = AVLTree<T>::create();
-    raiz = root->left();
+    raiz->root_ = root_->left();
     return raiz;
 }
 
@@ -488,7 +488,7 @@ typename AVLTree<T>::Ref AVLTree<T>::right() const
     assert(!is_empty());
     //TODO
     AVLTree<T>::Ref raiz = AVLTree<T>::create();
-    raiz = root->right();
+    raiz->root_ = root_->right();
     return raiz;
 
 }
@@ -508,7 +508,7 @@ int AVLTree<T>::height() const
 {
     int h = -1;
     //TODO
-     if( is_empty() ) return -1;
+    if( is_empty() ) return -1;
     return root_->height();
     //
 
@@ -538,12 +538,14 @@ bool AVLTree<T>::has(const T& k) const
       old_current = current();
 #endif
 
-  bool found = false;
+  bool end = false, found = false;
+  typename AVLTNode<T>::Ref cursor;
+  cursor = root_;
 
   //TODO
      do{
 
-      if(cursor_->item() == k){
+      if(cursor->item() == k){
           found = true;
       }
 
@@ -553,7 +555,7 @@ bool AVLTree<T>::has(const T& k) const
       }
 
       else if( (cursor_->has_right()) && (cursor_->item() < k) ){
-          cursor = cursor_->right();
+          cursor = cursor->right();
       }
 
       else{
@@ -564,7 +566,6 @@ bool AVLTree<T>::has(const T& k) const
 
     return found;
 
-    current_ = old_current;
   //
 #ifndef NDEBUG
   assert (!old_current_exists || old_current == current());
@@ -607,7 +608,7 @@ void AVLTree<T>::create_root(T const& item)
     assert(is_a_binary_search_tree());
     assert(is_a_balanced_tree());
     assert(!is_empty());
-    assert(item()==item);
+    assert(root_->item()==item);
 
 }
 

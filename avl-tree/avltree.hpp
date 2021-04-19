@@ -452,8 +452,8 @@ protected:
   //TODO
   //Chose a representation for this TAD.
 
-  AVLTree<T>::Ref root_;
-  AVLTree<T>::Ref cursor_;
+  typename AVLTNode<T>::Ref root_;
+  typename AVLTNode<T>::Ref cursor_;
   
   //
 
