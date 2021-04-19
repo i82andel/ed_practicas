@@ -522,7 +522,7 @@ int AVLTree<T>::balance_factor() const
 #else
     int bf = 0;
     //TODO
-
+    bf = right()->height() - left()->height();
     //
     return bf;
 #endif
@@ -538,11 +538,33 @@ bool AVLTree<T>::has(const T& k) const
       old_current = current();
 #endif
 
-  bool found = true;
+  bool found = false;
 
   //TODO
+     do{
 
+      if(cursor_->item() == k){
+          found = true;
+      }
 
+      else if( (cursor_->has_left()) && (cursor_->item() > k) ){
+          cursor = cursor->left();
+
+      }
+
+      else if( (cursor_->has_right()) && (cursor_->item() < k) ){
+          cursor = cursor_->right();
+      }
+
+      else{
+          end = true;
+      }
+
+    }while((end==false));
+
+    return found;
+
+    current_ = old_current;
   //
 #ifndef NDEBUG
   assert (!old_current_exists || old_current == current());
