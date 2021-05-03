@@ -57,7 +57,7 @@ scan_cell(int row, int col, int dy, int dx, AlphabetSoup const& soup,
                             if (i!=row || j!=col) //we don't want to scan the central cell again.
                             {
                                 //TODO
-                                dy = row - i;
+                                dy = col - i;
                                 dx = row - j;
 
 
@@ -87,6 +87,7 @@ scan_cell(int row, int col, int dy, int dx, AlphabetSoup const& soup,
                     //TODO:
                     //Case 2: It is middle letter, so we follow the scanning
                     //direction (dx,dy) if we can.
+                    if(scan_result.first == "") scan_cell(row + dx , col + dy , dy, dx, soup, node, scan_result);
 
                     //
                     //Found a word?
@@ -98,7 +99,7 @@ scan_cell(int row, int col, int dy, int dx, AlphabetSoup const& soup,
                     //A word was found for this chain so push the current cell
                     //coordinates pair <row,cols> into the
                     //stack scan_result.second
-
+                    scan_result.second.push(std::pair<int, int>(row, col));
 
                     //
                 }
