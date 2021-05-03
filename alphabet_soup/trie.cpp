@@ -130,7 +130,7 @@ Trie::insert(std::string const& k)
         root_ = TrieNode::create();
     }
     auxNode = root_;
-    for (size_t i = 0; i < k.sixe(); i++)
+    for (size_t i = 0; i < k.size(); i++)
     {
         
         if (auxNode->has(k[i]))
