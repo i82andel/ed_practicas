@@ -8,9 +8,6 @@
 #include <algorithm>
 #include <functional>
 #include <vector>
-#include "avltree.hpp"
-#include <climits>
-
 
 /**
  * @brief a AVLTree's Node.
@@ -454,8 +451,8 @@ protected:
 
   typename AVLTNode<T>::Ref root_;
   typename AVLTNode<T>::Ref current_;
-  typename AVLTNode<T>::Ref parent_;
-  
+  typename AVLTNode<T>::Ref prev_;
+
   //
 
 };
