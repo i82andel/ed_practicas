@@ -89,7 +89,7 @@ Trie::Ref Trie::create()
 TrieNode::Ref Trie::root() const
 {
     //TODO
-    return nullptr;
+    return root_;
     //
 }
 
