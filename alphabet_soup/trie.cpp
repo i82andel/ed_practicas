@@ -33,7 +33,6 @@ TrieNode::Ref TrieNode::create()
 bool
 TrieNode::has(char k) const
 {
-    bool ret_v = false;
     //TODO
     if (children_.find(k) == children_.end()) return false;
     return true;
@@ -156,7 +155,7 @@ TrieNode::Ref
 Trie::find_node(std::string const& pref) const
 {
     TrieNode::Ref auxNode;
-    int i;
+    unsigned int i;
 
     //TODO
     auxNode = root_;
