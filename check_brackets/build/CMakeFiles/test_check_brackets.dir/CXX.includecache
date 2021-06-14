@@ -46,3 +46,15 @@ iostream
 slist.hpp
 /home/aneri/i82andel/check_brackets/slist.hpp
 
+/home/aneri/i82andel/check_brackets/test_check_brackets.cpp
+exception
+-
+iostream
+-
+fstream
+-
+string
+-
+check_brackets.hpp
+/home/aneri/i82andel/check_brackets/check_brackets.hpp
+

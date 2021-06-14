@@ -182,49 +182,50 @@ class SList
       //TODO
       //Hint: use std::istringstream to convert a token into generic T type.
 
-      char skip;
-      T aux;
-      std::string cad;
-      in>>cad;
-      std::istringstream ss(cad);
-      int cont = 0;
+      std::string token;
+      std::getline(in, token, '\n');
 
-      if (ss.str() == "[]")
-      {
+      std::string aux = token.substr(token.find(' ')+1);
+
+      if (aux[0] != '[' or aux[aux.size()-1] != ']'){
+         
+         throw std::runtime_error("Worng input format.");
+
+      }
+      if (aux == "[]") { 
 
         return list;
 
-      }else{
-
-
-          while (ss)
-          {
-            if(ss.peek() == '['){
-                cont++;
-                ss>>skip;
-            }else if(ss.peek() == ']'){
-                cont--;
-                ss>>skip;
-
-            }else if (ss.peek() != ' ')
-            {
-              ss >> aux;
-                list->insert(aux);
-
-            }else{
-              ss>>skip;
-            } 
-          }
-
-
       }
 
-      if(cont != 0){
+      aux = aux.substr(2, aux.size()-4);
 
-           throw std::runtime_error ("Wrong input format.");
+      int espacios = 0;
+
+      for (auto aux2 : aux) if (aux2 == ' ') espacios++;
+      espacios++;
+
+      std::istringstream translater(aux);
+
+      for (int i = 0; i < espacios; ++i)
+      {
+        int cant;
+        translater >> cant;
+        list->insert(cant);
+        if (i != 0)
+        {
+
+          list->goto_next();
+
         }
+        
+      }
 
-        else return list;
+      return list;
+
+
+
+
   }
 
   /** @}*/
@@ -430,6 +431,7 @@ class SList
 
           auto newNode = SNode<T>::create(new_it, current_->next());
           current_->set_next(newNode);
+          //current_ = newNode;
 
       }
 
@@ -487,36 +489,30 @@ class SList
       //TODO:
       //Study three cases: remove from head, remove from last and
       //remove from middle.
-      if (current_ == head)
+      auto auxNode = root_;
+      if (current_ == head_)
       {
           pop_front();
-
-      }else if(!current_->has_next()){
-
-          auto auxNode = head;
-          while (auxNode->next() != current_)
+      }else if (!current_.has_next())
+      {
+          while (auxNode.next() != current_)
           {
-              auxNode = auxNode->next();
+              auxNode = auxNode.next();
           }
-          
-          auxNode->set_next(nullptr);
-          current_ = auxNode;
+          auxNode.set_next(nullptr);
 
+          
       }else{
-
-          auto auxNode = head;
-          while (auxNode->next() != current_)
+           while (auxNode.next() != curren_)
           {
-              auxNode = auxNode->next();
+              auxNode = auxNode.next();
           }
-          
-          auxNode->set_next(current_->next());
-          current_ = current_->next();
+          auxNode.set_next(current_.next());
+
 
       }
       
-
-      assert(!old_has_next || current()==old_next);
+      
   }
 
   /**
